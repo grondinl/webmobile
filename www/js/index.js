@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+//var device = require('cordova-plugin-device');
 var app = {
     // Application Constructor
     initialize: function() {
@@ -28,6 +29,8 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        getDeviceUUID();
+        getContactNumber();
     },
 
     // Update DOM on a Received Event
@@ -42,5 +45,31 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+function getDeviceUUID() {
+        var id = device.uuid;
+        console.log('device id' + id);
+}
+function getContactNumber() {
+        function onSuccessPhoneNumber(contacts) {
+            console.log('Found ' + contacts.length + ' contacts.');
+            var mesContacts = contacts;
+            for (i = 0; i < contacts.length; i++) {
+                var numbers = contacts[i].phoneNumbers;
+                for (j = 0; j < numbers.length; j++) {
+                    console.log('number: ' + numbers[j].value);
+                }
+            }
+            console.log(mesContacts);
+        };
 
+        function onErrorPhoneNumber(contactError) {
+            console.log('onError!PhoneNumber');
+        };
+        var options      = new ContactFindOptions();
+        options.multiple = true;
+        options.desiredFields = [navigator.contacts.fieldType.phoneNumbers];
+        options.hasPhoneNumber = true;
+        var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+        navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
+}
 app.initialize();
