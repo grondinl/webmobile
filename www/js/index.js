@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+//var device = require('cordova-plugin-device');
 var app = {
     // Application Constructor
     initialize: function() {
@@ -27,8 +28,9 @@ var app = {
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
+
         
         //authentification aux serveurs
         //  -récupère le numéro de téléphone
@@ -39,25 +41,8 @@ var app = {
             console.log(tel);
         });
 
-        
-        /*$('#changerPageContact').on("click", function() {
-            console.log("lol");
-            window.location="contact.html"
-   
-        });
-        
-        $('#changerPageMessage').on("click", function() {
-            window.location="message.html"
-   
-        });   */     
-        
-        //recherche des contact android utilisant l'aplication 
-        //Un onglet listant ces contacts
-        
-        
-        
-        //Un onglet pour les messages
-        //Barre de saisie + button envoyer                
+        getDeviceUUID();
+        getContactNumber();
     },
 
     // Update DOM on a Received Event
@@ -72,13 +57,59 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    },
+    }
 };
+
+app.initialize();
 
 function numberSent(){
     window.location=message.html;
     
 }
 
-app.initialize();
+function getDeviceUUID() {
+        var id = device.uuid;
+        console.log('device id' + id);
+}
+
+function getContactNumber() {
+        function onSuccessPhoneNumber(contacts) {
+            console.log('Found ' + contacts.length + ' contacts.');
+            var mesContacts = contacts;
+            for (i = 0; i < contacts.length; i++) {
+                var numbers = contacts[i].phoneNumbers;
+                for (j = 0; j < numbers.length; j++) {
+                    console.log('number: ' + numbers[j].value);
+                }
+            }
+            console.log(mesContacts);
+        };
+        function onErrorPhoneNumber(contactError) {
+            console.log('onError!PhoneNumber');
+        };
+        
+        var options      = new ContactFindOptions();
+        options.multiple = true;
+        options.desiredFields = [navigator.contacts.fieldType.phoneNumbers];
+        options.hasPhoneNumber = true;
+        var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+        navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
+}
+
+function onSuccessLocation(position){
+    var element = document.getElementById('geolocation');
+    element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                        'Longitude: '          + position.coords.longitude             + '<br />' +
+                        'Altitude: '           + position.coords.altitude              + '<br />' +
+                        'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                        'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                        'Heading: '            + position.coords.heading               + '<br />' +
+                        'Speed: '              + position.coords.speed                 + '<br />' +
+                        'Timestamp: '          + position.timestamp                    + '<br />';
+}
+
+function onErrorLocation(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
 
