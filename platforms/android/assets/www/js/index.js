@@ -33,12 +33,28 @@ var app = {
         //  -récupère le numéro de téléphone
         //  -vérifie que ce numéro est un utilisateur
         //  -si non l'ajoute
-        $("#etatAuthenti").html("Recupération numero de telephone");     
+        $("#sendTel").on('click', function() {
+            //var tel = document.saisieTel.telephone.value;
+            //console.log(tel);
+            window.location = "message.html";
+        });
+
         
-        $("#etatAuthenti").html("Verification utilisateur");
+        /*$('#changerPageContact').on("click", function() {
+            console.log("lol");
+            window.location="contact.html"
+   
+        });
+        
+        $('#changerPageMessage').on("click", function() {
+            window.location="message.html"
+   
+        });   */     
         
         //recherche des contact android utilisant l'aplication 
         //Un onglet listant ces contacts
+        
+        
         
         //Un onglet pour les messages
         //Barre de saisie + button envoyer                
@@ -47,6 +63,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
+        
+        console.log('Received Event: ' + id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
