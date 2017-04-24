@@ -31,7 +31,6 @@ var app = {
         this.receivedEvent('deviceready');
         getDeviceUUID();
         getContactNumber();
-        navigator.geolocation.getCurrentPosition(onSuccessLocation, onErrorLocation);
     },
 
     // Update DOM on a Received Event
@@ -75,44 +74,5 @@ function getContactNumber() {
         var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
         navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
 }
-
-function getPosition(){
-    function onSuccessLocation(position){
-        var positionFeatures = position;   
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />';
-            console.log(positionFeatures);
-    }
-
-function onSuccessLocation(position){
-    var element = document.getElementById('geolocation');
-    element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                        'Longitude: '          + position.coords.longitude             + '<br />' +
-                        'Altitude: '           + position.coords.altitude              + '<br />' +
-                        'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                        'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                        'Heading: '            + position.coords.heading               + '<br />' +
-                        'Speed: '              + position.coords.speed                 + '<br />' +
-                        'Timestamp: '          + position.timestamp                    + '<br />';
-}
-
-function onErrorLocation(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-}
-
-    function onErrorLocation(error){
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-        }
-}
-    
-
+ 
 app.initialize();
