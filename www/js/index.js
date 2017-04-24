@@ -90,6 +90,6 @@ function onSuccessLocation(position){
 function onErrorLocation(error) {
     alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
-    }
+}
 
 app.initialize();
