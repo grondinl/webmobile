@@ -21,6 +21,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        //document.addEventListener('numberSent' , numberSent(), false)
     },
 
     // deviceready Event Handler
@@ -29,6 +30,17 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
+
+        
+        //authentification aux serveurs
+        //  -récupère le numéro de téléphone
+        //  -vérifie que ce numéro est un utilisateur
+        //  -si non l'ajoute
+        $("#sendTel").on('click', function() {
+            var tel = document.saisieTel.telephone.value;
+            console.log(tel);
+        });
+
         getDeviceUUID();
         getContactNumber();
     },
@@ -36,6 +48,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
+        
+        console.log('Received Event: ' + id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
@@ -45,6 +59,13 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+app.initialize();
+
+function numberSent(){
+    window.location=message.html;
+    
+}
 
 function getDeviceUUID() {
         var id = device.uuid;
@@ -74,5 +95,6 @@ function getContactNumber() {
         var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
         navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
 }
+
  
 app.initialize();

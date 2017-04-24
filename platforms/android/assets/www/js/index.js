@@ -29,6 +29,11 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
+        $("#sendTel").on('click', function() {
+            //var tel = document.saisieTel.telephone.value;
+            //console.log(tel);
+            window.location = "message.html";
+        });            
         getDeviceUUID();
         getContactNumber();
         getPosition();
@@ -37,6 +42,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
+        
+        console.log('Received Event: ' + id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
