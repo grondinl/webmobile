@@ -61,8 +61,6 @@ function getContactNumber() {
             }
             console.log(mesContacts);
         };
-
-<<<<<<< HEAD
         function onErrorPhoneNumber(contactError) {
             console.log('onError!PhoneNumber');
         };
@@ -74,7 +72,3 @@ function getContactNumber() {
         navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
 }
 app.initialize();
-=======
-app.initialize();
-
->>>>>>> cdfd30c8307b181bb2e1bb49b6b2dbe0c1a8ba57
