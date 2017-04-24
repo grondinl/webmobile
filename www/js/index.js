@@ -43,6 +43,7 @@ var app = {
 
         getDeviceUUID();
         getContactNumber();
+        getLocation();
     },
 
     // Update DOM on a Received Event

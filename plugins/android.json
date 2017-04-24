@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.coolappz.WEM"
-        },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.coolappz.WEM"
         },
@@ -50,6 +47,18 @@
             "PACKAGE_NAME": "com.coolappz.WEM"
         },
         "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.coolappz.WEM"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.coolappz.WEM"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.coolappz.WEM"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.coolappz.WEM"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.coolappz.WEM"
         }
     },
