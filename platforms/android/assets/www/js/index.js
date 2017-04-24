@@ -28,6 +28,20 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        
+        //authentification aux serveurs
+        //  -récupère le numéro de téléphone
+        //  -vérifie que ce numéro est un utilisateur
+        //  -si non l'ajoute
+        $("#etatAuthenti").html("Recupération numero de telephone");     
+        
+        $("#etatAuthenti").html("Verification utilisateur");
+        
+        //recherche des contact android utilisant l'aplication 
+        //Un onglet listant ces contacts
+        
+        //Un onglet pour les messages
+        //Barre de saisie + button envoyer                
     },
 
     // Update DOM on a Received Event
@@ -40,7 +54,8 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
 };
 
 app.initialize();
+
