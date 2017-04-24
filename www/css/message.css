@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 24, 2017, 4:03:05 PM
+    Author     : grondinl
+*/
+
+#changerPageContact{
+    margin: 10px;
+}
+
+#zonesaisie{
+    margin: 10px;
+}
+
+#zonetext{
+    border: solid 1px;
+    height: 100px;
+}
+
+#zonedeconversation{
+    height: 650px;
+    width: 580px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.messageenvoye,.messagerecu{
+    max-width: 300px;
+    word-wrap: break-word;
+    margin: 2px;
+    margin-bottom: 10px;
+    padding: 5px;
+    color: black;
+    border-radius: 5px;
+}
+.messagerecu{
+    margin-left: 270px;
+    background-color: green;
+}
+
+.messageenvoye{
+    margin-left: 10px;
+    background-color: blue;
+}
+
