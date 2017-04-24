@@ -27,7 +27,7 @@ var app = {
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
         getDeviceUUID();
         getContactNumber();
@@ -43,12 +43,14 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    },
+    }
 };
+
 function getDeviceUUID() {
         var id = device.uuid;
         console.log('device id' + id);
 }
+
 function getContactNumber() {
         function onSuccessPhoneNumber(contacts) {
             console.log('Found ' + contacts.length + ' contacts.');
@@ -64,6 +66,7 @@ function getContactNumber() {
         function onErrorPhoneNumber(contactError) {
             console.log('onError!PhoneNumber');
         };
+        
         var options      = new ContactFindOptions();
         options.multiple = true;
         options.desiredFields = [navigator.contacts.fieldType.phoneNumbers];
@@ -71,4 +74,22 @@ function getContactNumber() {
         var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
         navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
 }
+
+function onSuccessLocation(position){
+    var element = document.getElementById('geolocation');
+    element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                        'Longitude: '          + position.coords.longitude             + '<br />' +
+                        'Altitude: '           + position.coords.altitude              + '<br />' +
+                        'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                        'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                        'Heading: '            + position.coords.heading               + '<br />' +
+                        'Speed: '              + position.coords.speed                 + '<br />' +
+                        'Timestamp: '          + position.timestamp                    + '<br />';
+}
+
+function onErrorLocation(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+    }
+
 app.initialize();
