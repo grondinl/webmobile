@@ -56,12 +56,9 @@ var app = {
         })
         
         //document.getElementById('sendTel').addEventListener('click' , numberSent(), false);
-        if(uidAndContactRecup == false) {
-            getDeviceUUID();
-            getContactNumber();
-            uidAndContactRecup = true;
-        }
-
+        getDeviceUUID();
+        getContactNumber();
+        getLocation();
     },
 
     // Update DOM on a Received Event

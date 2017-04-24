@@ -4,24 +4,35 @@
  * and open the template in the editor.
  */
 
-function onSuccessLocation(position){
-    var positionFeatures = position;   
-    var element = document.getElementById('geolocation');
-    element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                         'Longitude: '          + position.coords.longitude             + '<br />' +
-                         'Altitude: '           + position.coords.altitude              + '<br />' +
-                         'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                         'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                         'Heading: '            + position.coords.heading               + '<br />' +
-                         'Speed: '              + position.coords.speed                 + '<br />' +
-                         'Timestamp: '          + position.timestamp                    + '<br />';
-    console.log(positionFeatures);
-    }
+function getLocation(){
+    // onSuccess Callback
+    // This method accepts a Position object, which contains the
+    // current GPS coordinates
+     // Wait for device API libraries to load
+    //
     
-function onErrorLocation(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
+    console.log("rentre dans getLocalisation");
+    
+    // onSuccess Geolocation
+    function geolocationSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />' +
+                            'Altitude: '           + position.coords.altitude              + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                            'Heading: '            + position.coords.heading               + '<br />' +
+                            'Speed: '              + position.coords.speed                 + '<br />' +
+                            'Timestamp: '          + position.timestamp                    + '<br />';
+        console.log("I am here - SUCCESS");
+        console.log(position.coords.latitude);
+    };
+    
+    // onError Callback receives a PositionError object
+    function geolocationError(error) {
+        console.log("I am here - ERROR");
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+    navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
 }
-
-
-
