@@ -37,18 +37,44 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
+        <div id="state">
+            <h1>Location</h1>
+            <ul>
+                <li class="location">
+                    <span class="name">Location</span>
+                    <span class="state on">AVAILABLE</span>
+                    <span class="state off">UNAVAILABLE</span>
+                </li>
+                <li class="location-setting os-conditional android ios">
+                    <span class="name">Location setting</span>
+                    <span class="state on">ENABLED</span>
+                    <span class="state off">DISABLED</span>
+                </li>
+                <li class="gps-location android-only">
+                    <span class="name">GPS Location</span>
+                    <span class="state on">AVAILABLE</span>
+                    <span class="state off">UNAVAILABLE</span>
+                </li>
+                <li class="gps-location-setting android-only">
+                    <span class="name">GPS Location setting</span>
+                    <span class="state on">ENABLED</span>
+                    <span class="state off">DISABLED</span>
+                </li>
+            </ul>
+        </div>
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
-                <p onload='onload()' id="geolocation">Loading geolocation...you're screwed</p>
+                <p id="geolocation">Loading geolocation...</p>
             </div>
             <div>    
                 <form name="saisieTel">
                     <input id="tel" type="tel" name="telephone">
                     <input id="sendTel" type="submit" value="Envoyer">
-                </form>               
+                </form>
+                <button id="start"> Start ! </button>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>

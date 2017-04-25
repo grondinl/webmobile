@@ -31,6 +31,7 @@ function getLocation(){
     // onError Callback receives a PositionError object
     function geolocationError(error) {
         console.log("I am here - ERROR");
+        console.log('Error w/ watchPosition: ' +JSON.stringify(error));
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
@@ -38,3 +39,4 @@ function getLocation(){
     navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
     console.log('jai recup la pos');
 }
+

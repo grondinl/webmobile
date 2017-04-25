@@ -58,6 +58,18 @@ var app = {
         //document.getElementById('sendTel').addEventListener('click' , numberSent(), false);
         getDeviceUUID();
         getContactNumber();
+        
+        //Location
+        $('#request-location').on("click", function(){
+            cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+                console.log("Successfully requested location authorization: authorization was " + status);
+            }, 
+            function(error){console.error(error);});
+        });
+
+        $('#location-settings').on("click", function(){
+            cordova.plugins.diagnostic.switchToLocationSettings();
+        });
         getLocation();
     },
 
