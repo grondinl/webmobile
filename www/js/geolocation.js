@@ -15,6 +15,7 @@ function getLocation(){
     
     // onSuccess Geolocation
     function geolocationSuccess(position) {
+        console.log("I am here - SUCCESS");
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -24,7 +25,6 @@ function getLocation(){
                             'Heading: '            + position.coords.heading               + '<br />' +
                             'Speed: '              + position.coords.speed                 + '<br />' +
                             'Timestamp: '          + position.timestamp                    + '<br />';
-        console.log("I am here - SUCCESS");
         console.log(position.coords.latitude);
     };
     
@@ -34,5 +34,7 @@ function getLocation(){
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+    console.log('je vais recup la pos');
     navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+    console.log('jai recup la pos');
 }
