@@ -32,12 +32,24 @@ and open the template in the editor.
             <div> 
                 <button class="btn" id="changerPageMessage"> Message </button>
             </div>
+            <div id="liste-contact"></div>
+
         </div>
+        <script type="text/javascript" src="js/mustache.js"></script>
+        <script type="text/javascript" src="js/geolocation.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/contact.js"></script>
         <script type="text/javascript" src="js/identifier.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <script type="text/x-mustache-template" id="liste-contact-template">
+            <ul class="table-view">
+                {{#liste}}
+                    <li class="table-view-cell"> {{value}} </li>
+                {{/liste}}
+            </ul>        
+        </script>
     </body>
 </html>

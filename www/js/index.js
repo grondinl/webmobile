@@ -16,8 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-var uidAndContactRecup = false;
+var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
+                {message : "llllll", envoye : false}]};
+var contacts = { liste :[{value : 'Paul'}, {value : 'Jack'}]};
+        
+var template;
 
 var app = {
     // Application Constructor
@@ -31,31 +34,35 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-
-        
-        //authentification aux serveurs
-        //  -récupère le numéro de téléphone
-        //  -vérifie que ce numéro est un utilisateur
-        //  -si non l'ajoute
+   
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
         });
         
         $("#changerPageMessage").on('click', function(){
-            window.location='message.html'
-        })
+            window.location='message.html';
+            template = $('#liste-message-template').html();
+            $('#liste-message').html(Mustache.render(template,messages));
+        });
         
         $("#changerPageContact").on('click', function(){
-            window.location='contact.html'
-        })
-        
-        
+            window.location='contact.html';
+            template = $('#liste-contact-template').html();
+            $('#liste-contact').html(Mustache.render(template,contacts));
+        });
+                
         $('#start').on('click', function() {            
             window.location='message.html';
-        })
+        });
         
-        //document.getElementById('sendTel').addEventListener('click' , numberSent(), false);
+        $('#sendbtn').on('click',function(){
+           console.log(document.formenvoie.zonetext.value);
+           messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
+            
+        });
+        
+        
         getDeviceUUID();
         getContactNumber();
         

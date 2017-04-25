@@ -33,23 +33,31 @@ and open the template in the editor.
                 <button class="btn" id="changerPageContact"> Contact </button>
             </div>
             <div id="zonedeconversation">
-                <p class="messagerecu"> premier message recu</p>
-                <p class="messageenvoye">message envoyé</p>
+                <div id="liste-message"></div>
             </div>
             <div id="zonesaisie">
-                <form>
-                    <input id="zonetext" type="text">
+                <form name="formenvoie">
+                    <input id="zonetext" type="text" name="zonetext">
                     <button class="btn" id="sendbtn" type="submit"> Send </button>
                 </form>
                 
                 
             </div>
         </div>
+        <script type="text/javascript" src="js/mustache.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/geolocation.js"></script>
         <script type="text/javascript" src="js/contact.js"></script>
         <script type="text/javascript" src="js/identifier.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        
+        <script type="text/x-mustache-template" id="liste-message-template">
+            {{#liste}}
+                {{^envoye}}<p class="messagerecu"> {{message}} </p> {{/envoye}}
+                {{#envoye}}<p class="messageenvoye">{{message}}</p> {{/envoye}}
+            {{/liste}}
+        </script>
     </body>
 </html>
