@@ -1,0 +1,7 @@
+nbproject
+*.xml
+*.bin
+platforms
+test
+hooks
+plugins

@@ -16,11 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+var uidAndContactRecup = false;
+
 var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-        //document.addEventListener('numberSent' , numberSent(), false)
     },
 
     // deviceready Event Handler
@@ -39,7 +41,21 @@ var app = {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
         });
-
+        
+        $("#changerPageMessage").on('click', function(){
+            window.location='message.html'
+        })
+        
+        $("#changerPageContact").on('click', function(){
+            window.location='contact.html'
+        })
+        
+        
+        $('#start').on('click', function() {            
+            window.location='message.html';
+        })
+        
+        //document.getElementById('sendTel').addEventListener('click' , numberSent(), false);
         getDeviceUUID();
         getContactNumber();
         getLocation();
@@ -49,7 +65,6 @@ var app = {
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         
-        console.log('Received Event: ' + id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
@@ -60,10 +75,4 @@ var app = {
     }
 };
 
-app.initialize();
-
-function numberSent(){
-    window.location=message.html;
-    
-}
 app.initialize();
