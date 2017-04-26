@@ -15,7 +15,6 @@ and open the template in the editor.
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -31,6 +30,7 @@ and open the template in the editor.
             </div>
             <div > 
                 <button class="btn" id="changerPageContact"> Contact </button>
+                <button class="btn" id="retour"> Retour </button>
             </div>
             <div id="zonedeconversation">
                 <div id="liste-message"></div>
@@ -49,10 +49,10 @@ and open the template in the editor.
         <script type="text/javascript" src="js/geolocation.js"></script>
         <script type="text/javascript" src="js/contact.js"></script>
         <script type="text/javascript" src="js/identifier.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/ratchet.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
-        
+        <script type="text/javascript" src="http://cdn.socket.io/socket.io-1.3.7.js"></script>
+        <script type="text/javascript" src="js/message.js"></script>
         <script type="text/x-mustache-template" id="liste-message-template">
             {{#liste}}
                 {{^envoye}}<p class="messagerecu"> {{message}} </p> {{/envoye}}
