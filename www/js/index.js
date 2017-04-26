@@ -67,17 +67,36 @@ var app = {
         getContactNumber();
         
         //Location
-        $('#request-location').on("click", function(){
-            cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
-                console.log("Successfully requested location authorization: authorization was " + status);
-            }, 
-            function(error){console.error(error);});
-        });
+      $('#location_click').on('click',function(){
+          //window.location='localisation.html';
+          navigator.geolocation.getCurrentPosition(onSuccess, onError);
+          //str = JSON.stringify(geoloc);
+          //console.log(str);
+      });
 
-        $('#location-settings').on("click", function(){
-            cordova.plugins.diagnostic.switchToLocationSettings();
-        });
-        getLocation();
+
+     function onSuccess(position) {
+         console.log("success");
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />' +
+                            'Altitude: '           + position.coords.altitude              + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                            'Heading: '            + position.coords.heading               + '<br />' +
+                            'Speed: '              + position.coords.speed                 + '<br />' +
+                            'Timestamp: '          + position.timestamp                    + '<br />';
+    }
+   
+        // onError Callback receives a PositionError object
+       
+        
+    function onError(error) {
+        console.log("ERREUR");
+        alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+    }
+        //getLocation();
     },
 
     // Update DOM on a Received Event
