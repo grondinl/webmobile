@@ -5,10 +5,31 @@
  */
 
 $(document).ready(function(){
+    
+    var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+    socket.on('connect', function() {
+        console.log("socket connecté");
+        socket.on('text', function(text) {
+            console.log("message reçu : " + text);
+                alert(text);
+        });
+    });
+    
     var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
                 {message : "llllll", envoye : false}]};
+      
     var template = $('#liste-message-template').html();
     $('#liste-message').html(Mustache.render(template,messages));
+    
+    $("#changerPageContact").on('click', function(){
+        window.location='contact.html';
+    });
+    
+    $('#sendbtn').on('click',function(){
+        console.log(document.formenvoie.zonetext.value);
+        messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
+    });
+    
 });
 
 

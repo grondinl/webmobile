@@ -34,41 +34,10 @@ var app = {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
         });
-        
-        $("#changerPageMessage").on('click', function(){
-            window.location='message.html';
-
-        });
-        
-        $("#changerPageContact").on('click', function(){
-            window.location='contact.html';
-        });
-                
+                    
         $('#start').on('click', function() {
-            if (connected == 0) {
-                var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-                socket.on('connect', function() {
-                    console.log("socket connecté");
-                    socket.on('text', function(text) {
-                        console.log("message reçu : " + text);
-                        alert(text);
-                    });
-                });
-                connected=1;
-            } else {
-                console.log("already connected !");
-            }
             window.location='message.html';
-
         });
-        
-        
-        $('#sendbtn').on('click',function(){
-           console.log(document.formenvoie.zonetext.value);
-           messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
-            
-        });
-        
         
         getDeviceUUID();
         getContactNumber();
