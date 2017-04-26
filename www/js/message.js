@@ -9,6 +9,8 @@ $(document).ready(function(){
                 {message : "llllll", envoye : false}]};
     var template = $('#liste-message-template').html();
     $('#liste-message').html(Mustache.render(template,messages));
+    $('#retour').on('click', function() {
+        window.location="index.html";
+    });
 });
-
 
