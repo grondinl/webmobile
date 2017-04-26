@@ -20,7 +20,7 @@ $(document).ready(function(){
       
     var template = $('#liste-message-template').html();
     $('#liste-message').html(Mustache.render(template,messages));
-    
+
     $("#changerPageContact").on('click', function(){
         window.location='contact.html';
     });
@@ -31,5 +31,4 @@ $(document).ready(function(){
     });
     
 });
-
 

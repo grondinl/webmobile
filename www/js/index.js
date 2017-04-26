@@ -39,40 +39,41 @@ var app = {
             window.location='message.html';
         });
         
+
+       
+                // onSuccess Geolocation
+        function onSuccess(position) {
+            alert("find");
+            var element = document.getElementById('geolocation');
+            element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                    'Longitude: '          + position.coords.longitude             + '<br />' +
+                    'Altitude: '           + position.coords.altitude              + '<br />' +
+                    'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                    'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                    'Heading: '            + position.coords.heading               + '<br />' +
+                    'Speed: '              + position.coords.speed                 + '<br />' +
+                    'Timestamp: '          +                                   position.timestamp          + '<br />';
+        };
+
+            // onError Callback receives a PositionError object
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                    'message: ' + error.message + '\n');
+        };
+        
+        console.log("je vais passé");
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        console.log("je suis passé");
         getDeviceUUID();
         getContactNumber();
         
-        //Location
+       /*Location
       $('#location_click').on('click',function(){
           //window.location='localisation.html';
           navigator.geolocation.getCurrentPosition(onSuccess, onError);
           //str = JSON.stringify(geoloc);
           //console.log(str);
-      });
-
-
-     function onSuccess(position) {
-         console.log("success");
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />';
-    }
-   
-        // onError Callback receives a PositionError object
-       
-        
-    function onError(error) {
-        console.log("ERREUR");
-        alert('code: ' + error.code + '\n' +
-                'message: ' + error.message + '\n');
-    }
-        //getLocation();
+      });*/
     },
 
     // Update DOM on a Received Event
@@ -88,5 +89,5 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
+    
 app.initialize();
