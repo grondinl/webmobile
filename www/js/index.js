@@ -22,6 +22,7 @@ var contacts = { liste :[{value : 'Paul'}, {value : 'Jack'}]};
         
 var template;
 
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -34,7 +35,13 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-   
+        var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+        console.log(socket);
+        socket.on('connect', function() {
+            socket.on('text', function(text) {
+                alert(text);
+            });
+        });
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
