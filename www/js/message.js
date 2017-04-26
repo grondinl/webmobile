@@ -11,7 +11,7 @@ $(document).ready(function(){
         console.log("socket connecté");
         socket.on('text', function(text) {
             console.log("message reçu : " + text);
-                alert(text);
+            alert(text);
         });
     });
     

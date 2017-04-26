@@ -30,9 +30,16 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
+        
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
+            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+            var socket = io.connect('http://'+'129.88.242.120 '+':'+'3000');
+            socket.on('connect', function() {
+                console.log("socket connecté");
+                socket.emit('identification', tel);
+            });
         });
                     
         $('#start').on('click', function() {
