@@ -19,10 +19,8 @@
 var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
                 {message : "llllll", envoye : false}]};
 var contacts = { liste :[{value : 'Paul'}, {value : 'Jack'}]};
-        
+var connected = 0;
 var template;
-
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -35,13 +33,6 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-        console.log(socket);
-        socket.on('connect', function() {
-            socket.on('text', function(text) {
-                alert(text);
-            });
-        });
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
@@ -59,9 +50,24 @@ var app = {
             $('#liste-contact').html(Mustache.render(template,contacts));
         });
                 
-        $('#start').on('click', function() {            
+        $('#start').on('click', function() {
+            if (connected == 0) {
+                var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+                socket.on('connect', function() {
+                    console.log("socket connecté");
+                    socket.on('text', function(text) {
+                        console.log("message reçu : " + text);
+                        alert(text);
+                    });
+                });
+                connected=1;
+            } else {
+                console.log("already connected !");
+            }
             window.location='message.html';
+
         });
+        
         
         $('#sendbtn').on('click',function(){
            console.log(document.formenvoie.zonetext.value);

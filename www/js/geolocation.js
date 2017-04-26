@@ -35,7 +35,6 @@ function getLocation(){
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-    console.log('je vais recup la pos');
     navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
     console.log('jai recup la pos');
 }
