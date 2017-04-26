@@ -68,40 +68,24 @@ var app = {
            messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
             
         });
-        
-                // onSuccess Geolocation
-        function onSuccess(position) {
-            alert("find");
-            var element = document.getElementById('geolocation');
-            element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                    'Longitude: '          + position.coords.longitude             + '<br />' +
-                    'Altitude: '           + position.coords.altitude              + '<br />' +
-                    'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                    'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                    'Heading: '            + position.coords.heading               + '<br />' +
-                    'Speed: '              + position.coords.speed                 + '<br />' +
-                    'Timestamp: '          +                                   position.timestamp          + '<br />';
-        };
-
-            // onError Callback receives a PositionError object
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                    'message: ' + error.message + '\n');
-        };
-        
-        console.log("je vais passé");
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        console.log("je suis passé");
+         
+        //console.log("je vais passé");
+        //getMapLocation();
+        //watchMapPosition();
+        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        //console.log("je suis passé");
         getDeviceUUID();
         getContactNumber();
         
-       /*Location
-      $('#location_click').on('click',function(){
+       //Location
+      $('#locationClick').click(function(){
           //window.location='localisation.html';
-          navigator.geolocation.getCurrentPosition(onSuccess, onError);
+          console.log("je vais passé");
+          navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000});
+          console.log("je suis passé");
           //str = JSON.stringify(geoloc);
           //console.log(str);
-      });*/
+      });
     },
 
     // Update DOM on a Received Event
