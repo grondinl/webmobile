@@ -16,11 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
-                {message : "llllll", envoye : false}]};
-var contacts = { liste :[{value : 'Paul'}, {value : 'Jack'}]};
+
 var connected = 0;
-var template;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -40,14 +37,11 @@ var app = {
         
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
-            template = $('#liste-message-template').html();
-            $('#liste-message').html(Mustache.render(template,messages));
+
         });
         
         $("#changerPageContact").on('click', function(){
             window.location='contact.html';
-            template = $('#liste-contact-template').html();
-            $('#liste-contact').html(Mustache.render(template,contacts));
         });
                 
         $('#start').on('click', function() {
@@ -80,17 +74,36 @@ var app = {
         getContactNumber();
         
         //Location
-        $('#request-location').on("click", function(){
-            cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
-                console.log("Successfully requested location authorization: authorization was " + status);
-            }, 
-            function(error){console.error(error);});
-        });
+      $('#location_click').on('click',function(){
+          //window.location='localisation.html';
+          navigator.geolocation.getCurrentPosition(onSuccess, onError);
+          //str = JSON.stringify(geoloc);
+          //console.log(str);
+      });
 
-        $('#location-settings').on("click", function(){
-            cordova.plugins.diagnostic.switchToLocationSettings();
-        });
-        getLocation();
+
+     function onSuccess(position) {
+         console.log("success");
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />' +
+                            'Altitude: '           + position.coords.altitude              + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                            'Heading: '            + position.coords.heading               + '<br />' +
+                            'Speed: '              + position.coords.speed                 + '<br />' +
+                            'Timestamp: '          + position.timestamp                    + '<br />';
+    }
+   
+        // onError Callback receives a PositionError object
+       
+        
+    function onError(error) {
+        console.log("ERREUR");
+        alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+    }
+        //getLocation();
     },
 
     // Update DOM on a Received Event
