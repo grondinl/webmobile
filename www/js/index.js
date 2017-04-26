@@ -16,11 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
-                {message : "llllll", envoye : false}]};
-var contacts = { liste :[{value : 'Paul'}, {value : 'Jack'}]};
-        
-var template;
+
 
 var app = {
     // Application Constructor
@@ -42,14 +38,11 @@ var app = {
         
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
-            template = $('#liste-message-template').html();
-            $('#liste-message').html(Mustache.render(template,messages));
+
         });
         
         $("#changerPageContact").on('click', function(){
             window.location='contact.html';
-            template = $('#liste-contact-template').html();
-            $('#liste-contact').html(Mustache.render(template,contacts));
         });
                 
         $('#start').on('click', function() {            
