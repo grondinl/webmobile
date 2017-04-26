@@ -30,50 +30,28 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
+        
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
+            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+            var socket = io.connect('http://'+'129.88.242.120 '+':'+'3000');
+            socket.on('connect', function() {
+                console.log("socket connecté");
+                socket.emit('identification', tel);
+            });
         });
-        
-        $("#changerPageMessage").on('click', function(){
-            window.location='message.html';
-
-        });
-        
-        $("#changerPageContact").on('click', function(){
-            window.location='contact.html';
-        });
-                
+                    
         $('#start').on('click', function() {
-            if (connected == 0) {
-                var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-                socket.on('connect', function() {
-                    console.log("socket connecté");
-                    socket.on('text', function(text) {
-                        console.log("message reçu : " + text);
-                        alert(text);
-                    });
-                });
-                connected=1;
-            } else {
-                console.log("already connected !");
-            }
             window.location='message.html';
+        });
 
-        });
-        
-        
-        $('#sendbtn').on('click',function(){
-           console.log(document.formenvoie.zonetext.value);
-           messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
-            
-        });
-         
         //console.log("je vais passé");
         //getMapLocation();
         //watchMapPosition();
         //navigator.geolocation.getCurrentPosition(onSuccess, onError);
         //console.log("je suis passé");
+
         getDeviceUUID();
         getContactNumber();
         
