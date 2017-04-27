@@ -17,7 +17,6 @@
  * under the License.
  */
 
-var connected = 0;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -30,29 +29,23 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+        
+        /**var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
         socket.on('connect', function() {
             console.log("socket connecté");
+            socket.on('text', function(text) {
+               console.log(text); 
+            });
         });
-        
-        $("#sendTel").on('click', function() {
+        **/
+        $("#sendTel").on('click', function(e) {
             var tel = document.saisieTel.telephone.value;
 
-            console.log("tel : " + tel);
-            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+            console.log("numero : " + tel);
+            window.sessionStorage.setItem("tel", tel);
+            window.location = 'chargement.html';
+            e.preventDefault();
 
-            //var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
-            //var socket = io.connect('http://'+'129.88.242.121'+':'+'3000');
-            socket.on('connect', function() {
-                console.log("socket connectée");
-                socket.emit('identification', tel);
-            });
-
-
-            console.log(tel);
-
-            socket.emit('identification', tel);
-            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
         });
         
         $('#start').on('click', function() {
