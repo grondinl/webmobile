@@ -30,14 +30,6 @@ var app = {
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
         
-        /**var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-        socket.on('connect', function() {
-            console.log("socket connecté");
-            socket.on('text', function(text) {
-               console.log(text); 
-            });
-        });
-        **/
         $("#sendTel").on('click', function(e) {
             var tel = document.saisieTel.telephone.value;
 
@@ -52,26 +44,10 @@ var app = {
             window.location='message.html';
         });
 
-        //console.log("je vais passé");
-        //getMapLocation();
-        //watchMapPosition();
-        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        //console.log("je suis passé");
-        /**console.log("je vais passé");
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        console.log("je suis passé");
-        getDeviceUUID();
-        getContactNumber();
-        */
-        
+
        //Location
       $('#locationClick').click(function(){
-          //window.location='localisation.html';
-          //console.log("je vais passé");
           navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000});
-          //console.log("je suis passé");
-          //str = JSON.stringify(geoloc);
-          //console.log(str);
       });
     },
 
