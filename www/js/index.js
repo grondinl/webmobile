@@ -30,19 +30,29 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        
+        if (connected === 0) {
+            var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+            console.log("socket connecté");
+            //window.plugins.toast.showShortTop("connecté", function(){console.log("succes toast");}, function(){console.log("erreur toast");});
+            connected = 1;
+        }
+        socket.on('text', function(text) {console.log(text);});
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
-            console.log(tel);
+            console.log("tel : " + tel);
             //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+
             //var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
             var socket = io.connect('http://'+'129.88.242.121'+':'+'3000');
             socket.on('connect', function() {
                 console.log("socket connectée");
                 socket.emit('identification', tel);
             });
+
+            socket.emit('identification', tel);
+
         });
-                    
+        
         $('#start').on('click', function() {
             window.location='message.html';
         });
@@ -52,9 +62,12 @@ var app = {
         //watchMapPosition();
         //navigator.geolocation.getCurrentPosition(onSuccess, onError);
         //console.log("je suis passé");
-
+        /**console.log("je vais passé");
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        console.log("je suis passé");
         getDeviceUUID();
         getContactNumber();
+        */
         
        //Location
       $('#locationClick').click(function(){
