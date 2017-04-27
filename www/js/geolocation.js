@@ -93,6 +93,15 @@ var onSuccess = function(position) {
      'Heading: ' + position.coords.heading + '\n' +
      'Speed: ' + position.coords.speed + '\n' +
      'Timestamp: ' + position.timestamp + '\n');
+     
+     var geoloc = { lat : position.coords.latitude, 
+                    long : position.coords.longitude, 
+                    alt : position.coords.longitude,
+                    altAcc : position.coords.accuracy,
+                    head : position.coords.heading,
+                    speed: position.coords.speed,
+                    timeStamp : position.coords.timestamp}
+                    
 };
 
 

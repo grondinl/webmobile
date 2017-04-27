@@ -43,7 +43,7 @@ var app = {
             //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
 
             //var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
-            var socket = io.connect('http://'+'129.88.242.121'+':'+'3000');
+            //var socket = io.connect('http://'+'129.88.242.121'+':'+'3000');
             socket.on('connect', function() {
                 console.log("socket connectée");
                 socket.emit('identification', tel);
@@ -72,9 +72,9 @@ var app = {
        //Location
       $('#locationClick').click(function(){
           //window.location='localisation.html';
-          console.log("je vais passé");
+          //console.log("je vais passé");
           navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000});
-          console.log("je suis passé");
+          //console.log("je suis passé");
           //str = JSON.stringify(geoloc);
           //console.log(str);
       });
