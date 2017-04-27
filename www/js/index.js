@@ -35,9 +35,10 @@ var app = {
             var tel = document.saisieTel.telephone.value;
             console.log(tel);
             //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-            var socket = io.connect('http://'+'129.88.242.120 '+':'+'3000');
+            //var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+            var socket = io.connect('http://'+'129.88.242.121'+':'+'3000');
             socket.on('connect', function() {
-                console.log("socket connecté");
+                console.log("socket connectée");
                 socket.emit('identification', tel);
             });
         });
