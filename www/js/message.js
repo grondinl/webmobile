@@ -6,7 +6,7 @@
 
 $(document).ready(function(){
     
-    var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
     socket.on('connect', function() {
         console.log("socket connecté");
         socket.on('text', function(text) {
@@ -26,8 +26,11 @@ $(document).ready(function(){
     });
     
     $('#sendbtn').on('click',function(){
+        var message = document.formenvoie.zonetext.value;
         console.log(document.formenvoie.zonetext.value);
         messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
+        //socket.emit("position",pos) à compléter quand la geo marche
+        socket.emit("message", message);
     });
     
 });
