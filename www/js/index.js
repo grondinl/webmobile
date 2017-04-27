@@ -41,7 +41,7 @@ var app = {
             socket.emit('identification', tel);
             //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
         });
-                    
+        
         $('#start').on('click', function() {
             window.location='message.html';
         });
@@ -51,9 +51,12 @@ var app = {
         //watchMapPosition();
         //navigator.geolocation.getCurrentPosition(onSuccess, onError);
         //console.log("je suis passé");
-
+        /**console.log("je vais passé");
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        console.log("je suis passé");
         getDeviceUUID();
         getContactNumber();
+        */
         
        //Location
       $('#locationClick').click(function(){
