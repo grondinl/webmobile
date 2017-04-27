@@ -6,7 +6,7 @@
 
 $(document).ready(function(){
     
-    var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
     socket.on('connect', function() {
         console.log("socket connecté");
         socket.on('text', function(text) {

@@ -30,15 +30,14 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        if (connected === 0) {
-            var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+        var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+        socket.on('connect', function() {
             console.log("socket connecté");
-            //window.plugins.toast.showShortTop("connecté", function(){console.log("succes toast");}, function(){console.log("erreur toast");});
-            connected = 1;
-        }
-        socket.on('text', function(text) {console.log(text);});
+        });
+        
         $("#sendTel").on('click', function() {
             var tel = document.saisieTel.telephone.value;
+
             console.log("tel : " + tel);
             //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
 
@@ -49,8 +48,11 @@ var app = {
                 socket.emit('identification', tel);
             });
 
-            socket.emit('identification', tel);
 
+            console.log(tel);
+
+            socket.emit('identification', tel);
+            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
         });
         
         $('#start').on('click', function() {
