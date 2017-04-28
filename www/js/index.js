@@ -47,8 +47,15 @@ var app = {
 
        //Location
       $('#locationClick').click(function(){
-          navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000});
+          /*document.addEventListener(’DOMContentLoaded’, function(){ 
+            navigator.geolocation.getCurrentPosition(voirUtilisateur); 
+        },false); */
+          //window.location = 'localisation.html';
+          //navigator.geolocation.getCurrentPosition(voirUtilisateur, onError, {timeout:10000, enableHighAccuracy : true}); 
+          //e.preventDefault();
+          navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000, enableHighAccuracy : true});
       });
+  
     },
 
     // Update DOM on a Received Event
