@@ -6,7 +6,7 @@
 
 $(document).ready(function(){  
     function onDeviceReady () {       
-        this.receivedEvent('deviceready');
+        //this.receivedEvent('deviceready');
         var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
         socket.on('connect', function() {
             console.log("socket connecté");

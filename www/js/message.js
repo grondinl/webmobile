@@ -15,8 +15,10 @@ $(document).ready(function(){
         });
     });
     
-    var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
-                {message : "llllll", envoye : false}]};
+    var messages = {liste :[{message : "sssssssssssssss"}, 
+                {message : "llllll"}, {message :"Lorem ipsum dolor sit amet, \n\
+consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\
+ Lorem ipsum dolor sit amet."}]};
       
     var template = $('#liste-message-template').html();
     $('#liste-message').html(Mustache.render(template,messages));
