@@ -4,23 +4,61 @@
  * and open the template in the editor.
  */
 
+/*
+ * 
+ * @type contacts
+ * Array[
+ *      array phoneNumbers
+ *      string displayName
+ */
+var contactList;
+
+
+
+
+function getContactList() {
+    getContactNumber();
+    var listeContacts = { liste :[]};
+    for (i = 0; i < contactList.length; i++) {
+        listeContacts.liste.push({value : contactList[i].displayName, number : contactList[i].phoneNumbers[0]});
+    }
+    var template = $('#liste-contact-template').html();
+    $('#liste-contact').html(Mustache.render(template,listeContacts));
+}
+
+
+function getContactListApp() {
+    getContactNumber();
+}
+function updateContact() {
+    getContactNumber();
+    console.log(connection);
+    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+    socket.on('connect', function() {
+            console.log("socket connecté");
+            socket.emit('identification', window.localStorage.getItem("tel"));
+            socket.on('text', function(text) {
+               console.log(text); 
+            });
+            socket.on('identification ok', function() {
+                //alert("connecté !");
+                socket.emit('update contacts', contactList);
+            });
+            
+    });
+}
 
 function getContactNumber() {
         function onSuccessPhoneNumber(contacts) {
             console.log('Found ' + contacts.length + ' contacts.');
-            var listeContacts = { liste :[]};
+            contactList = contacts;
             for (i = 0; i < contacts.length; i++) {
                 var numbers = contacts[i].phoneNumbers;
                 for (j = 0; j < numbers.length; j++) {
                     console.log("nom: " + contacts[i].displayName);
                     console.log('number: ' + numbers[j].value);
-                    
-                    listeContacts.liste.push({value : contacts[i].displayName, number : numbers[j].value});
                 }
             }
-            console.log(listeContacts);
-            var template = $('#liste-contact-template').html();
-            $('#liste-contact').html(Mustache.render(template,listeContacts));
         };
         
         function onErrorPhoneNumber(contactError) {
