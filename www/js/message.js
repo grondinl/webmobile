@@ -26,8 +26,9 @@ $(document).ready(function(){
                     } else {
                         socket.emit("recuperation message", pos);
                     }
-                }, onError, {timeout:10000, enableHighAccuracy : true});
+                }, onError, {timeout:3000, enableHighAccuracy : true});
                 socket.on("envoie message", function(messageRecu){
+                    messages = {liste :[]};
                     for (i = 0; i < messageRecu.length; i++){  
                         messages.liste.push({message : messageRecu[i].message}); 
                     }
@@ -48,7 +49,7 @@ $(document).ready(function(){
                         } else {
                             socket.emit("newMessage", messageEtOption);
                         }
-                    }, onError, {timeout:10000, enableHighAccuracy : true});
+                    }, onError, {timeout:3000, enableHighAccuracy : true});
                     console.log(document.formenvoie.zonetext.value);
                     //socket.emit("position",pos) à compléter quand la geo marche
                     //socket.emit("identification", window.sessionStorage.getItem("tel"));
