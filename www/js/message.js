@@ -27,10 +27,17 @@ $(document).ready(function(){
     
     $('#sendbtn').on('click',function(){
         var message = document.formenvoie.zonetext.value;
+        var lat = navigator.geolocation.getCurrentPosition(onLatitude, onError, {timeout:10000, enableHighAccuracy : true});
+        var lon = navigator.geolocation.getCurrentPosition(onLongitude, onError, {timeout:10000, enableHighAccuracy : true});
+        console.log(lat);
+        console.log(lon);
         console.log(document.formenvoie.zonetext.value);
         messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
-        //socket.emit("position",pos) à compléter quand la geo marche
+        //envoi du message au serveur
         socket.emit("message", message);
+        //envoi de la latitude et longitude au serveur
+        socket.emit("lat", lat);
+        socket.emit("lon", lon);
     });
     
 });

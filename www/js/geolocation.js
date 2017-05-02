@@ -30,16 +30,15 @@ var onSuccess = function(position) {
      'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
      'Heading: ' + position.coords.heading + '\n' +
      'Speed: ' + position.coords.speed + '\n' +
-     'Timestamp: ' + position.timestamp + '\n');
-     
-     var geoloc = { lat : position.coords.latitude, 
-                    long : position.coords.longitude, 
-                    alt : position.coords.longitude,
-                    altAcc : position.coords.accuracy,
-                    head : position.coords.heading,
-                    speed: position.coords.speed,
-                    timeStamp : position.coords.timestamp}
-                    
+     'Timestamp: ' + position.timestamp + '\n');                 
+};
+
+var onLatitude = function(position) { 
+    return position.coords.latitude;                    
+};
+
+var onLongitude = function(position) { 
+    return position.coords.longitude;                    
 };
 
 
