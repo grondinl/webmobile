@@ -6,6 +6,7 @@
 
 $(document).ready(function(){
     function onDeviceReady () {
+        this.receivedEvent('deviceready');
         getContactNumber();
     }
     document.addEventListener('deviceready', onDeviceReady, false);

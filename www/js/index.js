@@ -29,7 +29,9 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        
+        if ((telLocal=window.localStorage.getItem("telLocal"))!==null) {
+            $('#tel').val(telLocal);
+        } 
         $("#sendTel").on('click', function(e) {
             var tel = document.saisieTel.telephone.value;
 
