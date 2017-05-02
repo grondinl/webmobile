@@ -6,6 +6,7 @@
 
 $(document).ready(function(){
     function onDeviceReady () {
+
         var messages = {liste :[]};
         var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
         socket.on('connect', function() {
@@ -16,11 +17,22 @@ $(document).ready(function(){
             });
             socket.emit("identification", window.sessionStorage.getItem("tel"));
             socket.on("identification ok", function() {
-                socket.emit("recuperation message", window.sessionStorage.getItem("tel"));
+                navigator.geolocation.getCurrentPosition(function(position){
+                    var pos ={};
+                    pos.lat=position.coords.latitude;
+                    pos.lon=position.coords.longitude;
+                    if (typeof pos.lat == 'undefined' || typeof pos.lon == 'undefined') {
+                        alert("erreur position ! Message non envoyé !");
+                    } else {
+                        socket.emit("recuperation message", pos);
+                    }
+                }, onError, {timeout:10000, enableHighAccuracy : true});
                 socket.on("envoie message", function(messageRecu){
                     for (i = 0; i < messageRecu.length; i++){  
                         messages.liste.push({message : messageRecu[i].message}); 
                     }
+                    var template = $('#liste-message-template').html();
+                    $('#liste-message').html(Mustache.render(template,messages));
                 });
                 $('#sendbtn').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
@@ -28,9 +40,9 @@ $(document).ready(function(){
                         var messageEtOption={};
                         messageEtOption.message = mess;
                         messageEtOption.lat = position.coords.latitude; 
-                        console.log(messageEtOption.lat);
+                        //console.log(messageEtOption.lat);
                         messageEtOption.lon = position.coords.longitude;
-                        console.log(messageEtOption.lon);
+                        //console.log(messageEtOption.lon);
                         if (typeof messageEtOption.lat == 'undefined' || typeof messageEtOption.lon == 'undefined') {
                             alert("erreur position ! Message non envoyé !");
                         } else {
@@ -49,8 +61,7 @@ $(document).ready(function(){
 
 
         });
-        var template = $('#liste-message-template').html();
-        $('#liste-message').html(Mustache.render(template,messages));
+
 
 
 
