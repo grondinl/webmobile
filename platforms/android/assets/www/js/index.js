@@ -17,7 +17,6 @@
  * under the License.
  */
 
-var connected = 0;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -31,39 +30,32 @@ var app = {
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
         
-        $("#sendTel").on('click', function() {
+        $("#sendTel").on('click', function(e) {
             var tel = document.saisieTel.telephone.value;
-            console.log(tel);
-            //var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
-            var socket = io.connect('http://'+'129.88.242.120 '+':'+'3000');
-            socket.on('connect', function() {
-                console.log("socket connecté");
-                socket.emit('identification', tel);
-            });
+
+            console.log("numero : " + tel);
+            window.sessionStorage.setItem("tel", tel);
+            window.location = 'chargement.html';
+            e.preventDefault();
+
         });
-                    
+        
         $('#start').on('click', function() {
             window.location='message.html';
         });
 
-        //console.log("je vais passé");
-        //getMapLocation();
-        //watchMapPosition();
-        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
-        //console.log("je suis passé");
 
-        getDeviceUUID();
-        getContactNumber();
-        
        //Location
       $('#locationClick').click(function(){
-          //window.location='localisation.html';
-          console.log("je vais passé");
-          navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000});
-          console.log("je suis passé");
-          //str = JSON.stringify(geoloc);
-          //console.log(str);
+          /*document.addEventListener(’DOMContentLoaded’, function(){ 
+            navigator.geolocation.getCurrentPosition(voirUtilisateur); 
+        },false); */
+          //window.location = 'localisation.html';
+          //navigator.geolocation.getCurrentPosition(voirUtilisateur, onError, {timeout:10000, enableHighAccuracy : true}); 
+          //e.preventDefault();
+          navigator.geolocation.getCurrentPosition(onSuccess, onError, {timeout:10000, enableHighAccuracy : true});
       });
+  
     },
 
     // Update DOM on a Received Event
