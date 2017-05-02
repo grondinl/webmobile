@@ -8,22 +8,28 @@
 function getContactNumber() {
         function onSuccessPhoneNumber(contacts) {
             console.log('Found ' + contacts.length + ' contacts.');
-            var mesContacts = contacts;
+            var listeContacts = { liste :[]};
             for (i = 0; i < contacts.length; i++) {
                 var numbers = contacts[i].phoneNumbers;
                 for (j = 0; j < numbers.length; j++) {
+                    console.log("nom: " + contacts[i].displayName);
                     console.log('number: ' + numbers[j].value);
+                    
+                    listeContacts.liste.push({value : contacts[i].displayName, number : numbers})
                 }
             }
-            console.log('Contacts : ' + mesContacts);
+            console.log(listeContacts)
+            var template = $('#liste-contact-template').html();
+            $('#liste-contact').html(Mustache.render(template,listeContacts));
         };
+        
         function onErrorPhoneNumber(contactError) {
             console.log('onError!PhoneNumber');
         };
         
         var options      = new ContactFindOptions();
         options.multiple = true;
-        options.desiredFields = [navigator.contacts.fieldType.phoneNumbers];
+        options.desiredFields = [navigator.contacts.fieldType.phoneNumbers, navigator.contacts.fieldType.displayName ];
         options.hasPhoneNumber = true;
         var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
         navigator.contacts.find(fields, onSuccessPhoneNumber, onErrorPhoneNumber, options);
