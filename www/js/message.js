@@ -6,7 +6,7 @@
 
 $(document).ready(function(){
     
-    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+    var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
     socket.on('connect', function() {
         console.log("socket connecté");
         socket.on('text', function(text) {
@@ -35,11 +35,19 @@ $(document).ready(function(){
     
     $('#sendbtn').on('click',function(){
         var message = document.formenvoie.zonetext.value;
+        var lat = navigator.geolocation.getCurrentPosition(onLatitude, onError, {timeout:10000, enableHighAccuracy : true});
+        var lon = navigator.geolocation.getCurrentPosition(onLongitude, onError, {timeout:10000, enableHighAccuracy : true});
+        console.log(lat);
+        console.log(lon);
         console.log(document.formenvoie.zonetext.value);
         messages.liste.push({message : document.formenvoie.zonetext.value});
         //socket.emit("position",pos) à compléter quand la geo marche
         socket.emit("identification", window.sessionStorage.getItem("tel"));
+
         socket.emit("message", message);
+        //envoi de la latitude et longitude au serveur
+        socket.emit("lat", lat);
+        socket.emit("lon", lon);
     });
     
 });

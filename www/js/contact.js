@@ -17,13 +17,15 @@ var contactList;
 
 
 function getContactList() {
-    getContactNumber();
-    var listeContacts = { liste :[]};
-    for (i = 0; i < contactList.length; i++) {
-        listeContacts.liste.push({value : contactList[i].displayName, number : contactList[i].phoneNumbers[0]});
-    }
-    var template = $('#liste-contact-template').html();
-    $('#liste-contact').html(Mustache.render(template,listeContacts));
+    getContactNumber(function() {
+        var listeContacts = { liste :[]};
+        for (i = 0; i < contactList.length; i++) {
+            listeContacts.liste.push({value : contactList[i].displayName, number : contactList[i].phoneNumbers[0]});
+        }
+        var template = $('#liste-contact-template').html();
+        $('#liste-contact').html(Mustache.render(template,listeContacts));
+    });
+
 }
 
 
@@ -31,24 +33,31 @@ function getContactListApp() {
     getContactNumber();
 }
 function updateContact() {
-    getContactNumber();
-    console.log(connection);
-    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
-    socket.on('connect', function() {
-            console.log("socket connecté");
-            socket.emit('identification', window.sessionStorage.getItem("tel"));
-            socket.on('text', function(text) {
-               console.log(text); 
-            });
-            socket.on('identification ok', function() {
-                //alert("connecté !");
-                socket.emit('update contacts', contactList);
-            });
-            
+    getContactNumber(function() {
+        console.log("connection");
+        var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+        socket.on('connect', function() {
+                console.log("socket connecté");
+                socket.emit('identification', window.sessionStorage.getItem("tel"));
+                socket.on('text', function(text) {
+                   console.log(text); 
+                });
+                socket.on('identification ok', function() {
+                    //alert("connecté !");
+                    console.log("taille contact : "+ contactList.length);
+                    for (i = 0; i<contactList.length; i++){
+                        console.log("update contact " + contactList[i].phoneNumbers[0].value);
+                        socket.emit('update contact', contactList[i].phoneNumbers[0].value);
+                    }
+                });
+                socket.on('update fini', function() {
+                   console.log("update fini"); 
+                });
+        });
     });
 }
 
-function getContactNumber() {
+function getContactNumber(callback) {
         function onSuccessPhoneNumber(contacts) {
             console.log('Found ' + contacts.length + ' contacts.');
             contactList = contacts;
@@ -59,6 +68,7 @@ function getContactNumber() {
                     console.log('number: ' + numbers[j].value);
                 }
             }
+            callback();
         };
         
         function onErrorPhoneNumber(contactError) {

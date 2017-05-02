@@ -8,7 +8,7 @@
 $(document).ready(function() {
     var tel = window.sessionStorage.getItem("tel");
     console.log("connection");
-    var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
+    var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
     socket.on('connect', function() {
             console.log("socket connecté");
             socket.emit('identification', tel);
