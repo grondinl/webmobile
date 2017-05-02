@@ -13,14 +13,12 @@
  */
 var contactList;
 
-
-
-
 function getContactList() {
     getContactNumber(function() {
         var listeContacts = { liste :[]};
+        console.log(contactList);
         for (i = 0; i < contactList.length; i++) {
-            listeContacts.liste.push({value : contactList[i].displayName, number : contactList[i].phoneNumbers[0]});
+            listeContacts.liste.push({value : contactList[i].displayName, number : contactList[i].phoneNumbers[0].value});
         }
         var template = $('#liste-contact-template').html();
         $('#liste-contact').html(Mustache.render(template,listeContacts));
