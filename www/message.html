@@ -52,7 +52,6 @@ and open the template in the editor.
                 
                 
             </div>
-        </div>
         <script type="text/javascript" src="js/mustache.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/geolocation.js"></script>
@@ -62,11 +61,18 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="http://cdn.socket.io/socket.io-1.3.7.js"></script>
         <script type="text/javascript" src="js/message.js"></script>
-        <script type="text/x-mustache-template" id="liste-message-template">
+        <script type="text/x-mustache-template" id="liste-message-template">        
+            <ul class="table-view">
             {{#liste}}
-                {{^envoye}}<p class="messagerecu"> {{message}} </p> {{/envoye}}
-                {{#envoye}}<p class="messageenvoye">{{message}}</p> {{/envoye}}
+              <li class="table-view-cell media">
+                <a class="navigate-right">
+                  <div class="media-body">
+                    <p> {{message}} </p>
+                  </div>
+                </a>
+              </li>
             {{/liste}}
+            </ul>  
         </script>
     </body>
 </html>
