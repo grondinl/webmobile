@@ -15,9 +15,9 @@ $(document).ready(function() {
             socket.on('text', function(text) {
                console.log(text); 
             });
-            socket.on('identification ok', function(text) {
+            socket.on('identification ok', function() {
                 $('#loading').hide();
-                alert("connecté !");
+                //alert("connecté !");
                 window.location = 'message.html';
             });
     });
