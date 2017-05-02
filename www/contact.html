@@ -28,9 +28,16 @@ and open the template in the editor.
                 <p class="event listening"></p>
                 <p class="event received"></p>
             </div>
-            <div> 
-                <button class="btn" id="changerPageMessage"> Message </button>
-            </div>
+            <nav class="bar bar-tab">
+                <a class="tab-item"id="changerPageMessage">
+                    <span class="icon icon-compose"></span>
+                    <span class="tab-label">Message</span>
+                </a>
+                <a class="tab-item active">
+                    <span class="icon icon-person"></span>
+                    <span class="tab-label">Contact</span>
+                </a>
+            </nav>
             <div id="liste-contact"></div>
 
         </div>
@@ -46,7 +53,7 @@ and open the template in the editor.
         <script type="text/x-mustache-template" id="liste-contact-template">
             <ul class="table-view">
                 {{#liste}}
-                    <li class="table-view-cell"> {{value}} </li>
+                    <li class="table-view-cell"> {{value}} <span class="badge"> {{number}}</span> </li>
                 {{/liste}}
             </ul>        
         </script>
