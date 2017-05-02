@@ -36,7 +36,7 @@ function updateContact() {
     var socket = io.connect('http://'+'129.88.242.120'+':'+'3000');
     socket.on('connect', function() {
             console.log("socket connecté");
-            socket.emit('identification', window.localStorage.getItem("tel"));
+            socket.emit('identification', window.sessionStorage.getItem("tel"));
             socket.on('text', function(text) {
                console.log(text); 
             });

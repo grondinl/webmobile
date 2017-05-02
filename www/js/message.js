@@ -11,17 +11,23 @@ $(document).ready(function(){
         console.log("socket connecté");
         socket.on('text', function(text) {
             console.log("message reçu : " + text);
-            alert(text);
+            //alert(text);
         });
     });
     
-    var messages = {liste :[{message : "sssssssssssssss"}, 
-                {message : "llllll"}, {message :"Lorem ipsum dolor sit amet, \n\
-consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\
- Lorem ipsum dolor sit amet."}]};
-      
-    var template = $('#liste-message-template').html();
-    $('#liste-message').html(Mustache.render(template,messages));
+    
+    socket.emit("recuperation message", window.sessionStorage.getItem("tel"));
+    
+    socket.on("envoie message", function(messageRecu){
+        var messages = {liste :[]};
+        for (i = 0; i < messageRecu.length; i++){  
+            messages.liste.push({message : messageRecu[i].message}); 
+            
+        }
+        var template = $('#liste-message-template').html();
+        $('#liste-message').html(Mustache.render(template,messages));
+        
+    });     
 
     $("#changerPageContact").on('click', function(){
         window.location='contact.html';
@@ -30,8 +36,9 @@ consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo
     $('#sendbtn').on('click',function(){
         var message = document.formenvoie.zonetext.value;
         console.log(document.formenvoie.zonetext.value);
-        messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
+        messages.liste.push({message : document.formenvoie.zonetext.value});
         //socket.emit("position",pos) à compléter quand la geo marche
+        socket.emit("identification", window.sessionStorage.getItem("tel"));
         socket.emit("message", message);
     });
     
