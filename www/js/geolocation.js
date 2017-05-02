@@ -33,11 +33,13 @@ var onSuccess = function(position) {
      'Timestamp: ' + position.timestamp + '\n');                 
 };
 
-var onLatitude = function(position) { 
+var onLatitude = function(position) {
+    console.log("latitude : " + position.coords.latitude);
     return position.coords.latitude;                    
 };
 
-var onLongitude = function(position) { 
+var onLongitude = function(position) {
+    console.log("longitude : " + position.coords.longitude);
     return position.coords.longitude;                    
 };
 

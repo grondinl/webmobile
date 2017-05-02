@@ -7,7 +7,6 @@
 $(document).ready(function(){  
     function onDeviceReady () {             
         getContactList();
-        updateContact();
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
         });
