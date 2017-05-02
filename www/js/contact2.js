@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function(){  
-    function onDeviceReady () {       
+    function onDeviceReady () {             
         getContactList();
         updateContact();
         $("#changerPageMessage").on('click', function(){

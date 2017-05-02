@@ -15,8 +15,10 @@ $(document).ready(function(){
         });
     });
     
-    var messages = {liste :[{message : "sssssssssssssss", envoye : true}, 
-                {message : "llllll", envoye : false}]};
+    var messages = {liste :[{message : "sssssssssssssss"}, 
+                {message : "llllll"}, {message :"Lorem ipsum dolor sit amet, \n\
+consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\
+ Lorem ipsum dolor sit amet."}]};
       
     var template = $('#liste-message-template').html();
     $('#liste-message').html(Mustache.render(template,messages));
@@ -27,10 +29,17 @@ $(document).ready(function(){
     
     $('#sendbtn').on('click',function(){
         var message = document.formenvoie.zonetext.value;
+        var lat = navigator.geolocation.getCurrentPosition(onLatitude, onError, {timeout:10000, enableHighAccuracy : true});
+        var lon = navigator.geolocation.getCurrentPosition(onLongitude, onError, {timeout:10000, enableHighAccuracy : true});
+        console.log(lat);
+        console.log(lon);
         console.log(document.formenvoie.zonetext.value);
         messages.liste.push({message : document.formenvoie.zonetext.value, envoye: true});
-        //socket.emit("position",pos) à compléter quand la geo marche
+        //envoi du message au serveur
         socket.emit("message", message);
+        //envoi de la latitude et longitude au serveur
+        socket.emit("lat", lat);
+        socket.emit("lon", lon);
     });
     
 });
