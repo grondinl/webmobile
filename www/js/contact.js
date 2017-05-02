@@ -15,10 +15,10 @@ function getContactNumber() {
                     console.log("nom: " + contacts[i].displayName);
                     console.log('number: ' + numbers[j].value);
                     
-                    listeContacts.liste.push({value : contacts[i].displayName, number : numbers})
+                    listeContacts.liste.push({value : contacts[i].displayName, number : numbers[j].value});
                 }
             }
-            console.log(listeContacts)
+            console.log(listeContacts);
             var template = $('#liste-contact-template').html();
             $('#liste-contact').html(Mustache.render(template,listeContacts));
         };
