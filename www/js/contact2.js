@@ -6,10 +6,8 @@
 
 $(document).ready(function(){  
     function onDeviceReady () {       
-        this.receivedEvent('deviceready');
-        
         getContactList();
-    
+        updateContact();
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
         });
