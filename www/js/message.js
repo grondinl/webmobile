@@ -29,8 +29,19 @@ $(document).ready(function(){
                 }, onError, {timeout:3000, enableHighAccuracy : true});
                 socket.on("envoie message", function(messageRecu){
                     messages = {liste :[]};
-                    for (i = 0; i < messageRecu.length; i++){  
-                        messages.liste.push({message : messageRecu[i].message}); 
+                    for (i = 0; i < messageRecu.length; i++){
+                        var moi = false;
+                        console.log("tel1 : " + messageRecu[i].numerotel + " et tel2 : "+ window.localStorage.getItem("tel"));
+                        if (messageRecu[i].numerotel == window.localStorage.getItem("tel")) {
+                            moi = true;
+                        }
+                        if (messageRecu[i].type=='text') {
+                            console.log(moi);
+                            messages.liste.push({message : messageRecu[i].message, text : true, image : false, moi : moi});
+                        } else if (messageRecu[i].type=='image') {
+                            messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi});
+                        }
+
                     }
                     var template = $('#liste-message-template').html();
                     $('#liste-message').html(Mustache.render(template,messages));
@@ -85,8 +96,12 @@ $(document).ready(function(){
                     //recuperation des messages
                     socket.on("envoie message", function(messageRecu){
                         messages = {liste :[]};
-                        for (i = 0; i < messageRecu.length; i++){  
-                            messages.liste.push({message : messageRecu[i].message}); 
+                        for (i = 0; i < messageRecu.length; i++){
+                            if (messageRecu[i].type=='text') {
+                                messages.liste.push({message : messageRecu[i].message, text : true, image : false});
+                            } else if (messageRecu[i].type=='image') {
+                                messages.liste.push({message : messageRecu[i].message, text : false, image : true});
+                            }
                         }
                         var template = $('#liste-message-template').html();
                         $('#liste-message').html(Mustache.render(template,messages));

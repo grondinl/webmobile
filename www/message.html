@@ -65,10 +65,17 @@ and open the template in the editor.
         <script type="text/x-mustache-template" id="liste-message-template">        
             <ul class="table-view">
             {{#liste}}
-              <li class="table-view-cell media">
+              <li {{#moi}}id="moi"{{/moi}} class="table-view-cell media">
                 <a class="navigate-right">
                   <div class="media-body">
-                    <p> {{message}} </p>
+                    {{#text}}
+                        <p > {{message}} </p>
+                    {{/text}}
+                    {{#image}}
+                        <div class ="container">
+                            <img src="data:image/jpeg;base64,{{message}}"/>
+                        </div>
+                    {{/image}}    
                   </div>
                 </a>
               </li>
