@@ -39,15 +39,12 @@ $(document).ready(function(){
                 $('#sendbtn').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
                     $('#zonetext').val("");
-                    //document.formenvoie.zonetext.value("");
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var messageEtOption={};
                         messageEtOption.message = mess;
                         messageEtOption.lat = position.coords.latitude; 
-                        //console.log(messageEtOption.lat);
                         messageEtOption.lon = position.coords.longitude;
                         messageEtOption.type = "text";
-                        //console.log(messageEtOption.lon);
                         if (typeof messageEtOption.lat == 'undefined' || typeof messageEtOption.lon == 'undefined') {
                             alert("erreur position ! Message non envoyé !");
                         } else {
@@ -57,7 +54,22 @@ $(document).ready(function(){
                     console.log(document.formenvoie.zonetext.value);
                     e.preventDefault();
                 });
-                
+                $('#photo').on('click', function() {
+                    navigator.camera.getPicture(function(image) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            var messageEtOption={};
+                            messageEtOption.message = image;
+                            messageEtOption.lat = position.coords.latitude; 
+                            messageEtOption.lon = position.coords.longitude;
+                            messageEtOption.type = "image";
+                            if (typeof messageEtOption.lat == 'undefined' || typeof messageEtOption.lon == 'undefined') {
+                                alert("erreur position ! Message non envoyé !");
+                            } else {
+                                socket.emit("newMessage", messageEtOption);
+                            }
+                        }, onError, {timeout:3000, enableHighAccuracy : true});    
+                    }, function(error) {console.log(error);}, {destinationType:0});
+                });
                 $('#actualisation').on('click', function(e) {
                     //envoie de la position
                     navigator.geolocation.getCurrentPosition(function(position){
