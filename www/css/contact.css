@@ -8,10 +8,9 @@ and open the template in the editor.
     Author     : grondinl
 */
 
-#changerPageMessage{
-    margin: 10px;
-}
-
 #liste-contact{
-    margin-top: 70px;
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    overflow: auto;
 }
