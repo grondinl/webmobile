@@ -35,6 +35,7 @@ $(document).ready(function(){
                     var template = $('#liste-message-template').html();
                     $('#liste-message').html(Mustache.render(template,messages));
                 });
+                
                 $('#sendbtn').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
                     $('#zonetext').val("");
@@ -54,25 +55,43 @@ $(document).ready(function(){
                         }
                     }, onError, {timeout:3000, enableHighAccuracy : true});
                     console.log(document.formenvoie.zonetext.value);
-                    //socket.emit("position",pos) à compléter quand la geo marche
-                    //socket.emit("identification", window.localStorage.getItem("tel"));
-
-
                     e.preventDefault();
                 });
+                
+                $('#actualisation').on('click', function(e) {
+                    //envoie de la position
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        var pos ={};
+                        pos.lat=position.coords.latitude;
+                        pos.lon=position.coords.longitude;
+                        if (typeof pos.lat == 'undefined' || typeof pos.lon == 'undefined') {
+                            alert("erreur position ! Message non envoyé !");
+                        } else {
+                            socket.emit("recuperation message", pos);
+                        }
+                    }, onError, {timeout:3000, enableHighAccuracy : true});
+                    //recuperation des messages
+                    socket.on("envoie message", function(messageRecu){
+                        messages = {liste :[]};
+                        for (i = 0; i < messageRecu.length; i++){  
+                            messages.liste.push({message : messageRecu[i].message}); 
+                        }
+                        var template = $('#liste-message-template').html();
+                        $('#liste-message').html(Mustache.render(template,messages));
+                    });                   
+                    
+                });
             });
-
-
-
         });
+        
         setTimeout(function() {if(socket.connected == false) {alert("probleme de connection")};}, 5000);
-
 
 
         $("#changerPageContact").on('click', function(){
             window.location='contact.html';
         });
     }
+    
     document.addEventListener('deviceready', onDeviceReady, false);
 
 });
