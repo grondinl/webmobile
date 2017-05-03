@@ -48,9 +48,6 @@ function updateContact() {
                         socket.emit('update contact', contactList[i].phoneNumbers[0].value);
                     }
                 });
-                socket.on('update fini', function() {
-                   console.log("update fini"); 
-                });
         });
         setTimeout(function() {if(socket.connected == false) {alert("probleme de connection")};}, 5000);
     });

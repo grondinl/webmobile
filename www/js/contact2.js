@@ -10,6 +10,10 @@ $(document).ready(function(){
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
         });
+        
+        $("#actualisation").on('click', function() {
+            updateContact();
+        });
     }
        
     document.addEventListener('deviceready', onDeviceReady, false);
