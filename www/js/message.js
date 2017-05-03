@@ -53,13 +53,6 @@ $(document).ready(function(){
                         }
                     }, onError, {timeout:3000, enableHighAccuracy : true});
                     console.log(document.formenvoie.zonetext.value);
-<<<<<<< HEAD
-=======
-                    //socket.emit("position",pos) à compléter quand la geo marche
-                    //socket.emit("identification", window.localStorage.getItem("tel"));
-
-
->>>>>>> d0ca54a10803b086e082def4c4bb311404267292
                     e.preventDefault();
                 });
                 
