@@ -33,10 +33,10 @@ function getContactListApp() {
 function updateContact() {
     getContactNumber(function() {
         console.log("connection");
-        var socket = io.connect('http://'+'129.88.242.123'+':'+'3000');
+        var socket = io.connect('http://'+'129.88.242.122'+':'+'3000');
         socket.on('connect', function() {
                 console.log("socket connecté");
-                socket.emit('identification', window.sessionStorage.getItem("tel"));
+                socket.emit('identification', window.localStorage.getItem("tel"));
                 socket.on('text', function(text) {
                    console.log(text); 
                 });
@@ -47,9 +47,24 @@ function updateContact() {
                         console.log("update contact " + contactList[i].phoneNumbers[0].value);
                         socket.emit('update contact', contactList[i].phoneNumbers[0].value);
                     }
-                });
-                socket.on('update fini', function() {
-                   console.log("update fini"); 
+                    socket.emit('liste contacts');
+                    socket.on('envoie liste contacts', function(contactListApp) {
+                        console.log("Recuperation de la liste des contact de l'application");
+                        var listeContacts = { liste :[]};
+                        console.log(contactListApp);
+                        console.log(contactList);
+                        for(i = 0 ; i < contactListApp.length; i++){
+                            for(j = 0; j < contactList.length; j ++) {
+                                if(contactListApp[i].numerotel === contactList[j].phoneNumbers[0].value) {
+                                    listeContacts.liste.push({value : contactList[j].displayName, 
+                                                            number : contactList[j].phoneNumbers[0].value});
+                                }
+                            }
+                        }
+                        console.log(listeContacts);
+                        var template = $('#liste-contact-template').html();
+                        $('#liste-contact').html(Mustache.render(template,listeContacts));     
+                    });
                 });
         });
         setTimeout(function() {if(socket.connected == false) {alert("probleme de connection")};}, 5000);

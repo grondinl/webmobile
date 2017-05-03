@@ -6,9 +6,13 @@
 
 $(document).ready(function(){  
     function onDeviceReady () {             
-        getContactList();
+        getContactList()
         $("#changerPageMessage").on('click', function(){
             window.location='message.html';
+        });
+        
+        $("#actualisation").on('click', function() {
+            updateContact();
         });
     }
        
