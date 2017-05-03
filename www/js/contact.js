@@ -52,6 +52,7 @@ function updateContact() {
                    console.log("update fini"); 
                 });
         });
+        setTimeout(function() {if(socket.connected == false) {alert("probleme de connection")};}, 5000);
     });
 }
 

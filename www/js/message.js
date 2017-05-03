@@ -15,7 +15,7 @@ $(document).ready(function(){
                 console.log("message reçu : " + text);
                 //alert(text);
             });
-            socket.emit("identification", window.sessionStorage.getItem("tel"));
+            socket.emit("identification", window.localStorage.getItem("tel"));
             socket.on("identification ok", function() {
                 navigator.geolocation.getCurrentPosition(function(position){
                     var pos ={};
@@ -38,6 +38,7 @@ $(document).ready(function(){
                 
                 $('#sendbtn').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
+                    document.formenvoie.zonetext.val("");
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var messageEtOption={};
                         messageEtOption.message = mess;
@@ -52,6 +53,13 @@ $(document).ready(function(){
                         }
                     }, onError, {timeout:3000, enableHighAccuracy : true});
                     console.log(document.formenvoie.zonetext.value);
+<<<<<<< HEAD
+=======
+                    //socket.emit("position",pos) à compléter quand la geo marche
+                    //socket.emit("identification", window.localStorage.getItem("tel"));
+
+
+>>>>>>> d0ca54a10803b086e082def4c4bb311404267292
                     e.preventDefault();
                 });
                 
@@ -80,6 +88,9 @@ $(document).ready(function(){
                 });
             });
         });
+        
+        setTimeout(function() {if(socket.connected == false) {alert("probleme de connection")};}, 5000);
+
 
         $("#changerPageContact").on('click', function(){
             window.location='contact.html';
