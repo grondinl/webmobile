@@ -29,14 +29,18 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() { //pour utiliser les plugins
         this.receivedEvent('deviceready');
-        if ((telLocal=window.localStorage.getItem("telLocal"))!==null) {
+        if ((telLocal=window.localStorage.getItem("tel"))!==null) {
+            console.log("num de tel enregistré :" + telLocal);
             $('#tel').val(telLocal);
-        } 
+        } else {
+            console.log("pas de num de tel enregistré");
+        }
+        
         $("#sendTel").on('click', function(e) {
             var tel = document.saisieTel.telephone.value;
 
             console.log("numero : " + tel);
-            window.sessionStorage.setItem("tel", tel);
+            window.localStorage.setItem("tel", tel);
             window.location = 'chargement.html';
             e.preventDefault();
 
