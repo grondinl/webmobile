@@ -33,7 +33,7 @@ function getContactListApp() {
 function updateContact() {
     getContactNumber(function() {
         console.log("connection");
-        var socket = io.connect('http://'+'129.88.242.119'+':'+'3000');
+        var socket = io.connect('http://'+'129.88.242.123'+':'+'3000');
         socket.on('connect', function() {
                 console.log("socket connecté");
                 socket.emit('identification', window.sessionStorage.getItem("tel"));
