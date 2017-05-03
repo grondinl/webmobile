@@ -37,13 +37,15 @@ $(document).ready(function(){
                 });
                 $('#sendbtn').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
-                    document.formenvoie.zonetext.val("");
+                    $('#zonetext').val("");
+                    //document.formenvoie.zonetext.value("");
                     navigator.geolocation.getCurrentPosition(function(position) {
                         var messageEtOption={};
                         messageEtOption.message = mess;
                         messageEtOption.lat = position.coords.latitude; 
                         //console.log(messageEtOption.lat);
                         messageEtOption.lon = position.coords.longitude;
+                        messageEtOption.type = "text";
                         //console.log(messageEtOption.lon);
                         if (typeof messageEtOption.lat == 'undefined' || typeof messageEtOption.lon == 'undefined') {
                             alert("erreur position ! Message non envoyé !");
