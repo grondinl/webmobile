@@ -9,7 +9,7 @@ $(document).ready(function() {
     function onDeviceReady() {
         var tel = window.localStorage.getItem("tel");
         console.log("connection");
-        var socket = io.connect('http://'+'129.88.242.123'+':'+'3000');
+        var socket = io.connect('http://'+'129.88.240.244'+':'+'3000');
         socket.on('connect', function() {
                 console.log("socket connecté");
                 socket.emit('identification', tel);

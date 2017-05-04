@@ -7,8 +7,15 @@
 $(document).ready(function(){
     function onDeviceReady () {
 
-        var messages = {liste :[]};
-        var socket = io.connect('http://'+'129.88.242.123'+':'+'3000');
+        if(window.localStorage.getItem("stocked")==="true") {
+            console.log("messages non nuls");
+            var messages = JSON.parse(window.localStorage.getItem("messages"));
+            var template = $('#liste-message-template').html();
+            $('#liste-message').html(Mustache.render(template,messages));
+        } else {
+            var messages = {liste :[]};
+        }
+        var socket = io.connect('http://'+'129.88.240.244'+':'+'3000');
         socket.on('connect', function() {
             console.log("socket connecté");
             socket.on('text', function(text) {
@@ -21,11 +28,11 @@ $(document).ready(function(){
                     var pos ={};
                     pos.lat=position.coords.latitude;
                     pos.lon=position.coords.longitude;
-                    if (typeof pos.lat == 'undefined' || typeof pos.lon == 'undefined') {
+                    /**if (typeof pos.lat == 'undefined' || typeof pos.lon == 'undefined') {
                         alert("erreur position ! Message non envoyé !");
                     } else {
                         socket.emit("recuperation message", pos);
-                    }
+                    }**/
                 }, onError, {timeout:3000, enableHighAccuracy : true});
                 socket.on("envoie message", function(messageRecu){
                     messages = {liste :[]};
@@ -43,8 +50,9 @@ $(document).ready(function(){
                             messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi,
                             numerotel : messageRecu[i].numerotel, temps : d});
                         }
-
-                    }
+                        window.localStorage.setItem("messages",JSON.stringify(messages));
+                        window.localStorage.setItem("stocked", "true");
+                    }   
                     var template = $('#liste-message-template').html();
                     $('#liste-message').html(Mustache.render(template,messages));
                 });
@@ -110,6 +118,7 @@ $(document).ready(function(){
                             } else if (messageRecu[i].type=='image') {
                                 messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi,
                             numerotel : messageRecu[i].numerotel, temps : d});
+
                             }
                         }
                         var template = $('#liste-message-template').html();
