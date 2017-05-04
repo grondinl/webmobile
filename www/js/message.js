@@ -28,11 +28,6 @@ $(document).ready(function(){
                     var pos ={};
                     pos.lat=position.coords.latitude;
                     pos.lon=position.coords.longitude;
-                    /**if (typeof pos.lat == 'undefined' || typeof pos.lon == 'undefined') {
-                        alert("erreur position ! Message non envoyé !");
-                    } else {
-                        socket.emit("recuperation message", pos);
-                    }**/
                 }, onError, {timeout:3000, enableHighAccuracy : true});
                 socket.on("envoie message", function(messageRecu){
                     messages = {liste :[]};
@@ -55,7 +50,7 @@ $(document).ready(function(){
                     $('#liste-message').html(Mustache.render(template,messages));
                 });
                 
-                $('#sendbtn').on('click',function(e){
+                $('#sendbtn').off('click').on('click',function(e){
                     var mess = document.formenvoie.zonetext.value;
                     $('#zonetext').val("");
                     navigator.geolocation.getCurrentPosition(function(position) {
