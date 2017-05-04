@@ -32,14 +32,16 @@ $(document).ready(function(){
                     for (i = 0; i < messageRecu.length; i++){
                         var moi = false;
                         console.log("tel1 : " + messageRecu[i].numerotel + " et tel2 : "+ window.localStorage.getItem("tel"));
+                        var d = new Date(parseInt(messageRecu[i].temps));
                         if (messageRecu[i].numerotel == window.localStorage.getItem("tel")) {
                             moi = true;
                         }
-                        if (messageRecu[i].type=='text') {
-                            console.log(moi);
-                            messages.liste.push({message : messageRecu[i].message, text : true, image : false, moi : moi});
+                        if (messageRecu[i].type=='text') {                       
+                            messages.liste.push({message : messageRecu[i].message, text : true, image : false, moi : moi,
+                            numerotel : messageRecu[i].numerotel, temps : d.toString()});
                         } else if (messageRecu[i].type=='image') {
-                            messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi});
+                            messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi,
+                            numerotel : messageRecu[i].numerotel, temps : d});
                         }
 
                     }
@@ -97,10 +99,17 @@ $(document).ready(function(){
                     socket.on("envoie message", function(messageRecu){
                         messages = {liste :[]};
                         for (i = 0; i < messageRecu.length; i++){
+                            var d = new Date(parseInt(messageRecu[i].temps));
+                            var moi = false;
+                            if (messageRecu[i].numerotel == window.localStorage.getItem("tel")) {
+                                moi = true;
+                            }
                             if (messageRecu[i].type=='text') {
-                                messages.liste.push({message : messageRecu[i].message, text : true, image : false});
+                                messages.liste.push({message : messageRecu[i].message, text : true, image : false, moi : moi,
+                            numerotel : messageRecu[i].numerotel, temps : d.toString()});
                             } else if (messageRecu[i].type=='image') {
-                                messages.liste.push({message : messageRecu[i].message, text : false, image : true});
+                                messages.liste.push({message : messageRecu[i].message, text : false, image : true, moi : moi,
+                            numerotel : messageRecu[i].numerotel, temps : d});
                             }
                         }
                         var template = $('#liste-message-template').html();

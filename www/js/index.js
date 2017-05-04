@@ -46,11 +46,6 @@ var app = {
 
         });
         
-        $('#start').on('click', function() {
-            window.location='message.html';
-        });
-
-
        //Location
       $('#locationClick').click(function(){
           /*document.addEventListener(’DOMContentLoaded’, function(){ 

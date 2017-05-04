@@ -66,6 +66,8 @@ and open the template in the editor.
             <ul class="table-view">
             {{#liste}}
               <li {{#moi}}id="moi"{{/moi}} class="table-view-cell media">
+                <p id="expediteur"> {{numerotel}} </p>
+                
                 <a class="navigate-right">
                   <div class="media-body">
                     {{#text}}
@@ -78,6 +80,7 @@ and open the template in the editor.
                     {{/image}}    
                   </div>
                 </a>
+                <p id="heure"> {{temps}} </p>
               </li>
             {{/liste}}
             </ul>  
