@@ -45,13 +45,12 @@ and open the template in the editor.
                 <div id="liste-message"></div>
             </div>
             <div id="zonesaisie">
-                <form name="formenvoie">
+                <form id="zone" name="formenvoie">
                     <input id="zonetext" type="text" name="zonetext">                   
                 </form>
                 <button class="btn" id="actualisation"> <span class="icon icon-refresh"></span></button>
                 <button class="btn" id="photo"> <span class="icon icon-pages"></span></button>
-                <button class="btn" id="sendbtn"> <span class="icon icon-right"></span> </button>
-                
+                <button class="btn" id="sendbtn" form="zone"> <span class="icon icon-right"></span> </button>
             </div>
         <script type="text/javascript" src="js/mustache.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
