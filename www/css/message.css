@@ -64,3 +64,16 @@ and open the template in the editor.
 #moi {
     background-color: #ADD8E6;
 }
+
+#expediteur {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#heure {
+    font-size: 9px;
+    font-style: italic;
+    position: relative;
+    left: 58%;
+    top: 10px;
+}
